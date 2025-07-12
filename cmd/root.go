@@ -27,8 +27,8 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().IntVarP(&focusDuration, "focus", "f", 1, "Focus duration in minutes")
-	rootCmd.Flags().IntVarP(&breakDuration, "break", "b", 1, "Break duration in minutes")
+	rootCmd.Flags().IntVarP(&focusDuration, "focus", "f", 25, "Focus duration in minutes")
+	rootCmd.Flags().IntVarP(&breakDuration, "break", "b", 5, "Break duration in minutes")
 }
 
 
