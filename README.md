@@ -1,5 +1,11 @@
 # Aragomodoro
 
+[![Run Go Tests](https://github.com/aureliomalheiros/Aragomodoro/actions/workflows/tests.yaml/badge.svg)](https://github.com/aureliomalheiros/Aragomodoro/actions/workflows/tests.yaml)
+
+[![Release Aragomodoro](https://github.com/aureliomalheiros/Aragomodoro/actions/workflows/release.yaml/badge.svg)](https://github.com/aureliomalheiros/Aragomodoro/actions/workflows/release.yaml)
+
+![Aragomodoro](assets/img/aragorn.png)
+
 *“Focus is not given to men. It is earned.”*  
 — **Aragomodoro**, son of Go, heir to the sacred cycles.
 
