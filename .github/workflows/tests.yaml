@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install ALSA and audio dependencies
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev pkg-config
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -25,3 +28,4 @@ jobs:
 
       - name: Run tests
         run: go test ./...
+
