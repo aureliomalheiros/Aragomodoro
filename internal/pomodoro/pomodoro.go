@@ -27,11 +27,11 @@ func PomodoroTimer(focusDuration int, breakDuration int) {
 
 	fmt.Printf("🧭 Aragomodoro begins! Focus for %d minutes.\n", focusDuration)
 	startTimer(time.Duration(focusDuration) * time.Minute)
-	sound.PlaySound("assets/sounds/classic-alarm.wav")
+	sound.ThemeAragorn()
 
 	fmt.Printf("🌿 Time for a break! Rest for %d minutes.\n", breakDuration)
 	startTimer(time.Duration(breakDuration) * time.Minute)
-	sound.PlaySound("assets/sounds/classic-alarm.wav")
+	sound.ThemeMountDoom()
 
 	fmt.Println("🍅 Session complete. Ready for the next adventure?")
 }

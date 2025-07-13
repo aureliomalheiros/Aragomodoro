@@ -1,21 +1,16 @@
 package sound
 
-import (
-	"log"
-	"os"
-	"testing"
-)
+import "testing"
 
-func TestPlaySound_InvalidFile(t *testing.T) {
-	null, _ := os.Open(os.DevNull)
-	log.SetOutput(null)
-	defer log.SetOutput(os.Stderr)
-
-	defer func() {
-		if r := recover(); r != nil {
-			t.Errorf("PlaySound should not panic. Got: %v", r)
-		}
-	}()
-
-	PlaySound("nonexistent.wav")
+func TestThemeHobbits(t *testing.T) {
+	ThemeHobbits()
 }
+
+func TestThemeElves(t *testing.T) {
+	ThemeElves()
+}
+
+func TestThemeAragorn(t *testing.T) {
+	ThemeAragorn()
+}
+

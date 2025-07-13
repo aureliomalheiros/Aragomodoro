@@ -1,40 +1,46 @@
 package sound
 
 import (
-	"log"
-	"os"
+	"math"
 	"time"
 
 	"github.com/faiface/beep"
-	"github.com/faiface/beep/wav"
 	"github.com/faiface/beep/speaker"
 )
 
-func PlaySound(path string) {
-	file, err := os.Open(path)
-	if err != nil {
-		log.Printf("Error opening sound file: %v", err)
-		return
-	}
-	defer file.Close()
+const sampleRate = 44100
 
-	streamer, format, err := wav.Decode(file)
-	if err != nil {
-		log.Printf("Error decoding sound file: %v", err)
-		return
-	}
-	defer streamer.Close()
+type note struct {
+	freq     float64
+	duration time.Duration
+}
 
-	err = speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
-	if err != nil {
-		log.Printf("Error initializing speaker: %v", err)
-		return
+func generateTone(frequency float64, duration time.Duration) beep.Streamer {
+	streamer := beep.StreamerFunc(func(samples [][2]float64) (int, bool) {
+		for i := range samples {
+			t := float64(i) / float64(sampleRate)
+			v := 0.2 * math.Sin(2*math.Pi*frequency*t)
+			samples[i][0] = v
+			samples[i][1] = v
+		}
+		return len(samples), true
+	})
+	return beep.Take(beep.SampleRate(sampleRate).N(duration), streamer)
+}
+
+func playSequence(notes []note) {
+	speaker.Init(beep.SampleRate(sampleRate), sampleRate/10)
+
+	var streamers []beep.Streamer
+	for _, n := range notes {
+		tone := generateTone(n.freq, n.duration)
+		silence := beep.Silence(beep.SampleRate(sampleRate).N(30 * time.Millisecond))
+		streamers = append(streamers, tone, silence)
 	}
 
 	done := make(chan bool)
-	speaker.Play(beep.Seq(streamer, beep.Callback(func() {
-		done <- true
-	})))
+	speaker.Play(beep.Seq(
+		append(streamers, beep.Callback(func() { done <- true }))...,
+	))
 	<-done
-	log.Println("Sound played successfully")
 }
