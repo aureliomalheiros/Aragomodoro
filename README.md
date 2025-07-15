@@ -6,9 +6,6 @@
 
 ![Aragomodoro](assets/img/aragorn.png)
 
-*“Focus is not given to men. It is earned.”*  
-— **Aragomodoro**, son of Go, heir to the sacred cycles.
-
 **Aragomodoro** is a command-line Pomodoro timer written in Go, inspired by the honor and discipline of *Aragorn*, son of Arathorn. March through your deep work like a Ranger of the North — 25 minutes at a time.
 
 ## Features
