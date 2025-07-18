@@ -10,6 +10,8 @@ import (
 
 const sampleRate = 44100
 
+var Mute bool = false
+
 type note struct {
 	freq     float64
 	duration time.Duration
@@ -29,6 +31,9 @@ func generateTone(frequency float64, duration time.Duration) beep.Streamer {
 }
 
 func playSequence(notes []note) {
+	if Mute {
+		return 
+	}
 	speaker.Init(beep.SampleRate(sampleRate), sampleRate/10)
 
 	var streamers []beep.Streamer
