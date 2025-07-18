@@ -31,6 +31,38 @@ aragomodoro/
 └── README.md
 ```
 
+### 🔧 Prerequisites
+
+- Go 1.20+
+- ALSA development libs (Linux only – for audio):
+
+```bash
+sudo apt install libasound2-dev pkg-config
+```
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- [Go](https://golang.org/dl/) version **1.20 or higher** installed and configured (`go` available in your terminal).
+- Compatible operating system: **Linux**, **macOS**, or **Windows**.
+
+### Install with `go install`
+
+To install Aragomodoro from source, run:
+
+```bash
+go install github.com/aureliomalheiros/aragomodoro@latest
+```
+
+#### Verify installation 
+
+After installation, check if the command is available:
+
+```bash
+aragomodoro --help
+```
+
 ## 🚀 Getting Started
 
 ```bash
@@ -43,13 +75,4 @@ Flags:
   -b, --break int   Break duration in minutes (default 5)
   -f, --focus int   Focus duration in minutes (default 25)
   -h, --help        help for aragomodoro
-```
-
-### 🔧 Prerequisites
-
-- Go 1.20+
-- ALSA development libs (Linux only – for audio):
-
-```bash
-  sudo apt install libasound2-dev
 ```
