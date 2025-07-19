@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+  paths-ignore:
+    - 'internal/ascii_text/ascii_text.go'
+    
 jobs:
   test:
     name: Run Unit Tests
