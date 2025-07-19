@@ -9,6 +9,8 @@ import (
 var (
 	focusDuration int
 	breakDuration int
+	repeatCount   int
+	continueOnBreak bool
 )
 
 var rootCmd = &cobra.Command{
@@ -16,7 +18,7 @@ var rootCmd = &cobra.Command{
 	Short: "Aragomodoro: A playful Pomodoro timer inspired by Aragorn",
 	Long:  "Aragomodoro is a playful take on the Pomodoro technique, inspired by the spirit of Aragorn from The Lord of the Rings.",
 	Run: func(cmd *cobra.Command, args []string) {
-		pomodoro.PomodoroTimer(focusDuration, breakDuration)
+		pomodoro.PomodoroTimer(focusDuration, breakDuration, repeatCount, continueOnBreak)
 	},
 }
 
@@ -29,6 +31,8 @@ func Execute() {
 func init() {
 	rootCmd.Flags().IntVarP(&focusDuration, "focus", "f", 25, "Focus duration in minutes")
 	rootCmd.Flags().IntVarP(&breakDuration, "break", "b", 5, "Break duration in minutes")
+	rootCmd.Flags().IntVarP(&repeatCount, "repeat", "r", 1, "Number of Pomodoros before a long break")
+	rootCmd.Flags().BoolVarP(&continueOnBreak, "continue", "c", false, "Continue the timer during breaks")
 }
 
 
