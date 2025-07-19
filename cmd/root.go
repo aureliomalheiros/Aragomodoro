@@ -4,6 +4,8 @@ import (
 	"os"
 	"github.com/spf13/cobra"
 	"github.com/aureliomalheiros/aragomodoro/internal/pomodoro"
+	"github.com/aureliomalheiros/aragomodoro/internal/ascii_text"
+
 )
 
 var (
@@ -18,6 +20,7 @@ var rootCmd = &cobra.Command{
 	Short: "Aragomodoro: A playful Pomodoro timer inspired by Aragorn",
 	Long:  "Aragomodoro is a playful take on the Pomodoro technique, inspired by the spirit of Aragorn from The Lord of the Rings.",
 	Run: func(cmd *cobra.Command, args []string) {
+		ascii_text.PrintAsciiText()
 		pomodoro.PomodoroTimer(focusDuration, breakDuration, repeatCount, continueOnBreak)
 	},
 }
