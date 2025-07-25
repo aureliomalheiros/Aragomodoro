@@ -3,6 +3,7 @@ package sound
 import (
 	"math"
 	"time"
+	"sync"
 
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
@@ -11,6 +12,8 @@ import (
 const sampleRate = 44100
 
 var Mute bool = false
+
+var speakerOnce sync.Once
 
 type note struct {
 	freq     float64
@@ -32,9 +35,12 @@ func generateTone(frequency float64, duration time.Duration) beep.Streamer {
 
 func playSequence(notes []note) {
 	if Mute {
-		return 
+		return
 	}
-	speaker.Init(beep.SampleRate(sampleRate), sampleRate/10)
+
+	speakerOnce.Do(func() {
+		speaker.Init(beep.SampleRate(sampleRate), sampleRate/10)
+	})
 
 	var streamers []beep.Streamer
 	for _, n := range notes {
@@ -49,3 +55,4 @@ func playSequence(notes []note) {
 	))
 	<-done
 }
+
