@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	Short: "Aragomodoro: A playful Pomodoro timer inspired by Aragorn",
 	Long:  "Aragomodoro is a playful take on the Pomodoro technique, inspired by the spirit of Aragorn from The Lord of the Rings.",
 	Run: func(cmd *cobra.Command, args []string) {
-		ascii_text.PrintAsciiText()
+		ascii_text.PrintAsciiTextAragomodoro()
 		pomodoro.PomodoroTimer(focusDuration, breakDuration, repeatCount, continueOnBreak)
 	},
 }
