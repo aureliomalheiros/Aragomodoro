@@ -29,5 +29,6 @@ func TestValidateDurations(t *testing.T) {
 			t.Errorf("Unexpected error for input focus=%d, break=%d, repeat=%d: %v", tt.focus, tt.breakTime, tt.repeatTime, err)
 		}
 	}
+	
 }
 

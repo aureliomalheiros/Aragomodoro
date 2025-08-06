@@ -3,10 +3,19 @@ package pomodoro
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/aureliomalheiros/aragomodoro/internal/sound"
+	"github.com/aureliomalheiros/aragomodoro/internal/ascii_text"
 )
+
+func clearScreen() {
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
+	ascii_text.PrintAsciiTextAragomodoro()
+}
 
 func ValidateDurations(focusDuration, breakDuration, repeatCount int) error {
 
@@ -42,6 +51,8 @@ func PomodoroTimer(focusDuration int, breakDuration int, repeatCount int, contin
 	fmt.Printf("🌿 Time for a break! Rest for %d minutes.\n", breakDuration)
 	startTimer(time.Duration(breakDuration) * time.Minute)
 	sound.ThemeMountDoom()
+	
+	clearScreen()
 
 	if continueOnBreak {
 		continueOnBreak = false
