@@ -3,7 +3,7 @@ package sound
 import "testing"
 
 func TestThemeHobbits(t *testing.T) {
-	Mute = true 
+	Mute = true
 	ThemeHobbits()
 }
 
@@ -16,4 +16,3 @@ func TestThemeAragorn(t *testing.T) {
 	Mute = true
 	ThemeAragorn()
 }
-

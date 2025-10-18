@@ -2,8 +2,8 @@ package sound
 
 import (
 	"math"
-	"time"
 	"sync"
+	"time"
 
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
@@ -55,4 +55,3 @@ func playSequence(notes []note) {
 	))
 	<-done
 }
-
