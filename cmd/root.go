@@ -31,7 +31,7 @@ var rootCmd = &cobra.Command{
 			}
 			fmt.Printf("Starting Aragomodoro web interface on port %d...\n", port)
 			fmt.Printf("Access at: http://localhost:%d\n", port)
-			
+
 			webServer := web.NewServer(port)
 			if err := webServer.Start(); err != nil {
 				panic(err)
