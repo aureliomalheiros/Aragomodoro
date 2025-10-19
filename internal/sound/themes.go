@@ -48,13 +48,13 @@ func ThemeMountDoom() {
 
 func ThemeAragorn() {
 	notes := []note{
-		{196.00, 400 * time.Millisecond},  // G3
-		{220.00, 400 * time.Millisecond},  // A3
-		{246.94, 400 * time.Millisecond},  // B3
-		{329.63, 600 * time.Millisecond},  // E4
-		{246.94, 300 * time.Millisecond},  // B3
-		{196.00, 300 * time.Millisecond},  // G3
-		{220.00, 600 * time.Millisecond},  // A3
+		{196.00, 400 * time.Millisecond}, // G3
+		{220.00, 400 * time.Millisecond}, // A3
+		{246.94, 400 * time.Millisecond}, // B3
+		{329.63, 600 * time.Millisecond}, // E4
+		{246.94, 300 * time.Millisecond}, // B3
+		{196.00, 300 * time.Millisecond}, // G3
+		{220.00, 600 * time.Millisecond}, // A3
 	}
 
 	playSequence(notes)

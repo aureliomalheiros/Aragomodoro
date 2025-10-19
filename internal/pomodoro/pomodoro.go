@@ -6,8 +6,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/aureliomalheiros/aragomodoro/internal/sound"
 	"github.com/aureliomalheiros/aragomodoro/internal/ascii_text"
+	"github.com/aureliomalheiros/aragomodoro/internal/sound"
 )
 
 func clearScreen() {
@@ -33,7 +33,7 @@ func ValidateDurations(focusDuration, breakDuration, repeatCount int) error {
 }
 
 func PomodoroTimer(focusDuration int, breakDuration int, repeatCount int, continueOnBreak bool) {
-	
+
 	if err := ValidateDurations(focusDuration, breakDuration, repeatCount); err != nil {
 		fmt.Println("❌", err)
 		os.Exit(1)
@@ -41,7 +41,7 @@ func PomodoroTimer(focusDuration int, breakDuration int, repeatCount int, contin
 
 	if repeatCount > 1 {
 		repeatPomodoro(focusDuration, breakDuration, repeatCount)
-		return 
+		return
 	}
 
 	fmt.Printf("🧭 Aragomodoro begins! Focus for %d minutes.\n", focusDuration)
@@ -51,7 +51,7 @@ func PomodoroTimer(focusDuration int, breakDuration int, repeatCount int, contin
 	fmt.Printf("🌿 Time for a break! Rest for %d minutes.\n", breakDuration)
 	startTimer(time.Duration(breakDuration) * time.Minute)
 	sound.ThemeMountDoom()
-	
+
 	clearScreen()
 
 	if continueOnBreak {
@@ -76,14 +76,18 @@ func continuePomodoro(focusDuration int, breakDuration int) {
 }
 
 func repeatPomodoro(focusDuration int, breakDuration int, repeatCount int) {
-	for i:= 1; i <= repeatCount; i++ {
+	for i := 1; i <= repeatCount; i++ {
 		fmt.Printf("🔁 Starting Pomodoro session %d/%d...\n", i, repeatCount)
 		PomodoroTimer(focusDuration, breakDuration, 1, false)
 		if i < repeatCount {
 			fmt.Println("🌟 Get ready for the next Pomodoro!")
-		}else if i == repeatCount {
+		} else if i == repeatCount {
 			fmt.Println("🎉 All Pomodoros completed! Great job!")
 			fmt.Println("🍅 Time for a well-deserved long break!")
 		}
 	}
 }
+
+// func webModePomodoro(focusDuration int, breakDuration int, repeatCount int, continueOnBreak bool, webPort int) {
+	
+// }
