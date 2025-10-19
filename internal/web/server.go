@@ -15,7 +15,7 @@ func NewServer(port int) *Server {
 		port: port,
 		mux:  http.NewServeMux(),
 	}
-	
+
 	s.setupRoutes()
 	return s
 }

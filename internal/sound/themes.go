@@ -59,3 +59,19 @@ func ThemeAragorn() {
 
 	playSequence(notes)
 }
+
+func SoftFocusComplete() {
+	notes := []note{
+		{523.25, 200 * time.Millisecond}, // C5 - soft beep
+		{659.25, 300 * time.Millisecond}, // E5 - higher tone
+	}
+	playSequence(notes)
+}
+
+func SoftBreakComplete() {
+	notes := []note{
+		{440.00, 250 * time.Millisecond}, // A4 - gentle boop
+		{349.23, 350 * time.Millisecond}, // F4 - lower, relaxing tone
+	}
+	playSequence(notes)
+}

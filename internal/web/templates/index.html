@@ -301,6 +301,59 @@
     <script>
         let ws;
         let isActive = false;
+        let audioContext;
+        let previousSessionType = null;
+
+        // Initialize audio context
+        function initAudio() {
+            if (!audioContext && (window.AudioContext || window.webkitAudioContext)) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Play soft beep for focus completion
+        function playSoftFocusComplete() {
+            if (!audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Soft beep: C5 then E5
+            oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.2);
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        // Play soft boop for break completion
+        function playSoftBreakComplete() {
+            if (!audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Gentle boop: A4 then F4
+            oscillator.frequency.setValueAtTime(440.00, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.25);
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.6);
+        }
 
         // Initialize WebSocket connection
         function initWebSocket() {
@@ -333,6 +386,9 @@
 
         // Start timer
         async function startTimer() {
+            // Initialize audio context on user interaction
+            initAudio();
+            
             const focusDuration = parseInt(document.getElementById('focusDuration').value);
             const breakDuration = parseInt(document.getElementById('breakDuration').value);
             const repeatCount = parseInt(document.getElementById('repeatCount').value);
@@ -427,6 +483,16 @@
                 statusText = '🎉 Pomodoro session completed! Great job!';
             }
             timerStatus.textContent = statusText;
+
+            // Play sound when transitioning between phases
+            if (previousSessionType && previousSessionType !== session.type) {
+                if (previousSessionType === 'focus' && session.type === 'break') {
+                    playSoftFocusComplete();
+                } else if (previousSessionType === 'break' && (session.type === 'focus' || session.type === 'completed')) {
+                    playSoftBreakComplete();
+                }
+            }
+            previousSessionType = session.type;
 
             // Update progress circle
             const totalSeconds = session.duration * 60;
